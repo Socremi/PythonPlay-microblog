@@ -8,6 +8,7 @@ from flask_login import logout_user, login_required
 from werkzeug.urls import url_parse
 from app import db # Added in Chapter 5
 from app.forms import RegistrationForm # Added in chapter 5
+from datetime import datetime # Added in chapter 6
 
 # The following method was added in the second half of chapter 6
 # The following function defines code to be executed right before any view function.
