@@ -9,6 +9,17 @@ from werkzeug.urls import url_parse
 from app import db # Added in Chapter 5
 from app.forms import RegistrationForm # Added in chapter 5
 
+# The following route was added in Chapter 6
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
+
 # The following route was added in chapter 5
 @app.route('/register', methods=['GET', 'POST'])
 def register():
