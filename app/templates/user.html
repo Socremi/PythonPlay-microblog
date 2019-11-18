@@ -10,11 +10,14 @@
     </table>>
     <hr />
     {% for post in posts %}
+<!-- Removed in second half of chapter 6. Replaced with Jinja2's 'include'.
     <table>
         <tr valign="top">
             <td><img src="{{ post.author.avatar(36) }}"></td>
             <td>{{ post.author.username }} says: <b>{{ post.body }}</b></td>
         </tr>
     </table>
+-->
+        {% include '_post.html' %} <!-- Includes _post.html sub-template here -->
     {% endfor %}
 {% endblock %}
