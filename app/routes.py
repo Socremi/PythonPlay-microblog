@@ -9,6 +9,14 @@ from werkzeug.urls import url_parse
 from app import db # Added in Chapter 5
 from app.forms import RegistrationForm # Added in chapter 5
 
+# The following method was added in the second half of chapter 6
+# The following function defines code to be executed right before any view function.
+@app.before_request # What tells Flask to execute this before any other request
+def before_request():
+    if current_user.is_authenticated: #Checks is user is logged in
+        current_user.last_seen = datetime.utcnow() # Updates the user's last seen time to now.
+        db.session.commit() # Commits the last seen time to the database. 
+
 # The following route was added in Chapter 6
 @app.route('/user/<username>')
 @login_required
@@ -19,6 +27,7 @@ def user(username):
         {'author': user, 'body': 'Test post #2'}
     ]
     return render_template('user.html', user=user, posts=posts)
+
 
 # The following route was added in chapter 5
 @app.route('/register', methods=['GET', 'POST'])
