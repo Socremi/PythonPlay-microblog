@@ -4,7 +4,7 @@
 {% block content %}
     <h1>Edit Profile</h1>
     <form action="" method="post">
-        {{ form.hidden_tage() }}
+        {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br />
             {{ form.username(size=32) }}<br />
@@ -21,3 +21,4 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
+{% endblock %}

@@ -9,6 +9,7 @@ from werkzeug.urls import url_parse
 from app import db # Added in Chapter 5
 from app.forms import RegistrationForm # Added in chapter 5
 from datetime import datetime # Added in chapter 6
+from app.forms import EditProfileForm # Added in chapter 6
 
 # The following method was added in the second half of chapter 6
 # The following function defines code to be executed right before any view function.
@@ -85,3 +86,18 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+# The following view function was added in chapter 6
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.about_me.data = current_user.about_me
+    return render_template('edit_profile.html', title='Edit Profile', form=form)

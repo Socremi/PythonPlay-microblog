@@ -9,9 +9,13 @@
                 <h1>User: {{ user.username }}</h1>
                 {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %} <!-- These two lines added in chapter 6 second half. -->
                 {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+                {% if user == current_user %}
+                <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
+                {% endif %}
             </td>
         </tr>
-    </table>>
+    </table>
+    
     <hr />
     {% for post in posts %}
 <!-- Removed in second half of chapter 6. Replaced with Jinja2's 'include'.
