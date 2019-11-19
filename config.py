@@ -7,7 +7,7 @@ class Config(object):
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # Below code was added during Chapter 7
+    # Below code was added during Chapter 7 
     MAIL_SERVER = os.environ.get('MAIL_SERVER') # Can set a default SMTP server here. For testing purposes, run the 
                                                 # test server with 
                                                 # "(venv) $ python -m smtpd -n -c DebuggingServer localhost:8025" 
