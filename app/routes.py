@@ -6,18 +6,19 @@ from app.models import User
 from flask import request
 from flask_login import logout_user, login_required
 from werkzeug.urls import url_parse
-from app import db # Added in Chapter 5
-from app.forms import RegistrationForm # Added in chapter 5
-from datetime import datetime # Added in chapter 6
-from app.forms import EditProfileForm # Added in chapter 6
+from app import db  # Added in Chapter 5
+from app.forms import RegistrationForm  # Added in chapter 5
+from datetime import datetime  # Added in chapter 6
+from app.forms import EditProfileForm  # Added in chapter 6
 
 # The following method was added in the second half of chapter 6
-# The following function defines code to be executed right before any view function.
-@app.before_request # What tells Flask to execute this before any other request
+# The following function defines code to be executed right before any
+# view function.
+@app.before_request  # Tells Flask to execute this before any other request
 def before_request():
-    if current_user.is_authenticated: #Checks is user is logged in
-        current_user.last_seen = datetime.utcnow() # Updates the user's last seen time to now.
-        db.session.commit() # Commits the last seen time to the database. 
+    if current_user.is_authenticated:  # Checks is user is logged in
+        current_user.last_seen = datetime.utcnow()  # Updates last seen time
+        db.session.commit()  # Commits the last seen time to the database
 
 # The following route was added in Chapter 6
 @app.route('/user/<username>')
@@ -36,7 +37,7 @@ def user(username):
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    
+
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
@@ -48,6 +49,7 @@ def register():
         flash('Congratualtions, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
 
 @app.route('/')
 @app.route('/index')
@@ -64,6 +66,7 @@ def index():
         }
     ]
     return render_template('index.html', title='Home Page', posts=posts)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -82,10 +85,12 @@ def login():
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
 
 # The following view function was added in chapter 6
 @app.route('/edit_profile', methods=['GET', 'POST'])
