@@ -91,7 +91,8 @@ def logout():
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
+    # form = EditProfileForm() # Removed in chapter 7 in favour of the following line
+    form = EditProfileForm(current_user.username) # Added in chapter 7
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
