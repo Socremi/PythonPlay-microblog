@@ -4,7 +4,8 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from logging.handlers import SMTPHandler # Added in chapter 7
+from logging.handlers import SMTPHandler, RotatingFileHandler # Added in chapter 7
+import os # Added in chapter 7
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -30,6 +31,14 @@ if not app.debug:
             credentials=auth, secure=secure)
         mail_handler.setLevel(logging.ERROR)
         app.logger.addHandler(mail_handler)
+
+    # The following code is related to logging minor errors to a file
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+    file_handler = RotatingFileHandler('logs/microblog.log', maxBytes=10240, backupCount=10)
+    file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
 
 from app import routes, models
 from app import errors # Added in chapter 7
