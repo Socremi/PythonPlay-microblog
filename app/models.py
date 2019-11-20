@@ -66,6 +66,19 @@ class User(UserMixin, db.Model):
         return self.followed.filter(
             followers.c.followed_if == user.id).count() > 0
 
+    # This method tells SQLAlchemy how to retrieve posts from users that the
+    # passed-in user has followed. It joins the followers table with the Post
+    # table where the user_id associated with the post matches that of any of
+    # the followed users (hence followers.c.followed_id). It filter's the
+    # result to only the posts were the follower_id of the followers table
+    # matches the user's own id. It is then order by the timestamp in the Post
+    # table in descending order.
+    def followed_posts(self):
+        return Post.query.join(
+            followers, (followers.c.followed_id == Post.user_id)).filter(
+                followers.c.follower_id == self.id).order_by(
+                    Post.timestamp.desc())
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
