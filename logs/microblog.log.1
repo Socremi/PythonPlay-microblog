@@ -1,13 +1,4 @@
-2019-11-21 11:52:09,019 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]
-2019-11-21 11:52:50,031 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]
-2019-11-21 14:08:45,949 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]
-2019-11-21 14:12:37,461 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]
-2019-11-21 14:12:55,601 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]
-2019-11-21 14:15:20,340 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]
-2019-11-21 14:16:14,237 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]
-2019-11-21 14:47:18,770 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]
-2019-11-21 15:37:59,194 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]
-2019-11-21 15:38:04,178 ERROR: Exception on /user/Susan [GET] [in c:\dev\vscworkspaces\pythonplay-microblog\venv\lib\site-packages\flask\app.py:1890]
+2019-11-21 15:49:08,746 ERROR: Exception on /user/Susan [GET] [in c:\dev\vscworkspaces\pythonplay-microblog\venv\lib\site-packages\flask\app.py:1890]
 Traceback (most recent call last):
   File "c:\dev\vscworkspaces\pythonplay-microblog\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1245, in _execute_context
     self.dialect.do_execute(
@@ -95,3 +86,4 @@ FROM user, followers
 WHERE followers.followed_id = ? AND followers.follower_id = user.id) AS anon_1]
 [parameters: (1,)]
 (Background on this error at: http://sqlalche.me/e/e3q8)
+2019-11-21 15:49:44,002 INFO: Microblog startup [in C:\Dev\VSCWorkspaces\PythonPlay-microblog\app\__init__.py:46]

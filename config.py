@@ -1,23 +1,31 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # Below code was added during Chapter 7 
-    MAIL_SERVER = os.environ.get('MAIL_SERVER') # Can set a default SMTP server here. For testing purposes, run the 
-                                                # test server with 
-                                                # "(venv) $ python -m smtpd -n -c DebuggingServer localhost:8025" 
-                                                # in a seperate command prompt window, then 
-                                                # "set MAIL_SERVER=localhost" and 
-                                                # "set MAIL_PORT=8025"
-    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25) # Defaults to port 25 if the environment variable is not set
+    # Below code was added during Chapter 7
+    MAIL_SERVER = os.environ.get('MAIL_SERVER')
+    # Can set a default SMTP server here. For testing purposes, run the test
+    # server with "(venv) $ python -m smtpd -n -c DebuggingServer
+    # localhost:8025" in a seperate command prompt window, then
+    # "set MAIL_SERVER=localhost" and
+    # "set MAIL_PORT=8025"
+
+    # Defaults to port 25 if the environment variable is not set
+    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
     MAIL_USE_TLS = os.environ.get('MAIL_USER_TLS') is not None
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') # Do not enter username and password here as it will be saved to a 
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') # source file and distributed, exposing your password. Set your 
-                                                    # variables in command line with :>set MAIL_PASSWORD='yourpassword' 
-                                                    # or find another more permanent way of doing it.
-    ADMINS = ['ryan.couper1@defence.gov.au','ryan.couper@uon.edu.au','socremi@hotmail.com']
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    # Do not enter username and password here as it will be saved to a
+    # source file and distributed, exposing your password. Set your variables
+    # in command line with $ set MAIL_PASSWORD='yourpassword' or find another
+    # way of doing it.
+    ADMINS = ['ryan.couper1@defence.gov.au',
+              'ryan.couper@uon.edu.au',
+              'socremi@hotmail.com'
+              ]
