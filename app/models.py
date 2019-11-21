@@ -64,7 +64,7 @@ class User(UserMixin, db.Model):
 
     def is_following(self, user):
         return self.followed.filter(
-            followers.c.followed_if == user.id).count() > 0
+            followers.c.followed_id == user.id).count() > 0
 
     # This method tells SQLAlchemy how to retrieve posts from users that the
     # passed-in user has followed. It joins the followers table with the Post
