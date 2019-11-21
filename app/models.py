@@ -13,13 +13,9 @@ def load_user(id):
 
 # The following table was added in Chapter 8 of the Flask Mega Tutorial
 followers = db.Table('followers',
-                     db.Column('follower_id',
-                               db.Integer,
-                               db.ForeignKey('user.id')),
-                     db.Column('followed_id',
-                               db.Integer,
-                               db.ForeignKey('user.id'))
-                     )
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+)
 
 
 class User(UserMixin, db.Model):
