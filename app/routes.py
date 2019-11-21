@@ -96,8 +96,8 @@ def logout():
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    # form = EditProfileForm() # Removed in chapter 7 in favour of the following line
-    form = EditProfileForm(current_user.username) # Added in chapter 7
+    # form = EditProfileForm() # Rmv'd in Ch7 7 for the following
+    form = EditProfileForm(current_user.username)  # Added in chapter 7
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
@@ -106,7 +106,9 @@ def edit_profile():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title='Edit Profile', form=form)
+    return render_template('edit_profile.html',
+                           title='Edit Profile',
+                           form=form)
 
 
 # The following route was added in chapter 8
@@ -140,4 +142,3 @@ def unfollow(username):
     db.session.commit()
     flash('You are not following {}.'.format(username))
     return redirect(url_for('user', username=username))
-    
