@@ -12,7 +12,7 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In') 
+    submit = SubmitField('Sign In')
 
 
 class RegistrationForm(FlaskForm):
@@ -49,4 +49,5 @@ class EditProfileForm(FlaskForm):
         if username.data != self.original_username:
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
-                raise ValidationError('Username in use. Please select a different username.')
+                raise ValidationError('Username in use. Please select a '
+                                      'different username.')
