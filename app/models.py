@@ -51,7 +51,7 @@ class User(UserMixin, db.Model):
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}' \
-        .format(digest, size)
+            .format(digest, size)
 
     # Methods below this line for this class were added in Chapter 8
     def follow(self, user):
@@ -73,11 +73,25 @@ class User(UserMixin, db.Model):
     # result to only the posts were the follower_id of the followers table
     # matches the user's own id. It is then order by the timestamp in the Post
     # table in descending order.
+#    def followed_posts(self):
+#        return Post.query.join(
+#            followers, (followers.c.followed_id == Post.user_id)).filter(
+#                followers.c.follower_id == self.id).order_by(
+#                    Post.timestamp.desc())
+# The above method was commented out in favour of the below method to include
+# the user's own posts.
+    # The folowing method works by first creating an artificial table called
+    # "followed" constructed from the followers table and the posts table,
+    # only taking elements where the current user is in the followers table as
+    # a follower of another user (the "followed" user), using that information
+    # to determine the id of the followed user (followed_id) to retrieve posts
+    # for the Post table where the id == followed_id
     def followed_posts(self):
-        return Post.query.join(
+        followed = Post.query.join(
             followers, (followers.c.followed_id == Post.user_id)).filter(
-                followers.c.follower_id == self.id).order_by(
-                    Post.timestamp.desc())
+                followers.c.follower_id == self.id)
+        own = Post.query.filter_by(user_id=self.id)
+        return followed.union(own).order_by(Post.timestamp.desc())
 
 
 class Post(db.Model):
