@@ -1,6 +1,7 @@
 # Personalised .gitignore section
 .vscode/
 logs/
+*.db
 
 
 # Everthing below this line is from https://github.com/github/gitignore/blob/master/Python.gitignore
