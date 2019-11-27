@@ -29,3 +29,4 @@ class Config(object):
               'ryan.couper@uon.edu.au',
               'socremi@hotmail.com'
               ]
+    POSTS_PER_PAGE = 5
