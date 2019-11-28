@@ -1,7 +1,23 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
-        <h1>Sign </h1>
+
+
+{% block app_content %}
+        <h1>Sign In</h1>
+        <div class="row">
+            <div class="col-md-4">
+                {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+        <br />
+        <p>New User? <a href="{{ url_for('register') }}">Click to Register</a></p>
+        <p>
+            Forgot your password?
+            <a href="{{ url_for('reset_password_request') }}">Click to reset</a>
+        </p>
+{% endblock %}
+<!--</div> Code omitted in Ch11
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             <p>
@@ -22,6 +38,7 @@
             <p>{{ form.submit() }}</p>
         </form>
         <p> New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
-        <!-- Password reset feature added in chapter 10 -->
+        <!-- Password reset feature added in chapter 10
         <p>Forgort your password?<a href="{{ url_for('reset_password_request') }}">Click to reset it</a></p>
 {% endblock %}
+-->

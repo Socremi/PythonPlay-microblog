@@ -7,6 +7,7 @@ from flask_login import LoginManager
 from logging.handlers import SMTPHandler, RotatingFileHandler  # Added in ch7
 import os  # Added in chapter 7
 from flask_mail import Mail  # This line was added in Chapter 10
+from flask_bootstrap import Bootstrap  # Added in Ch11
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -18,6 +19,9 @@ mail = Mail(app)  # This line was added in chapter 10
 # name used in a url_for() call). Used when a user attempts to access a page
 # that requires the user to be logged in.
 login.login_view = 'login'
+
+# Bootstrap for dynamic styles and JS handling
+bootstrap = Bootstrap(app)
 
 # The code below this line was added in Chapter 7
 if not app.debug:
