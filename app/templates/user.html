@@ -10,13 +10,13 @@
                 <h1>User: {{ user.username }}</h1>
                 {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
                 {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
-                <p>{{ user.followers.count() }} followers, {{ users.followed.count() }} following.</p>
+                <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
                 {% if user == current_user %}
                 <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
                 {% elif not current_user.is_following(user) %}
                 <p><a href=" {{ url_for('follow', username=user.username) }}">Follow</a></p>
                 {% else %}
-                <p><a href="{{ url_for('unfollow, username=user.username) }}">Unfollow</a></p>
+                <p><a href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a></p>
                 {% endif %}
             </td>
         </tr>
@@ -40,38 +40,4 @@
     </nav>
 {% endblock %}
 <!-- CH11 code ends here -->
-
-<!-- Omitted in Ch11
-    <table>
-        <tr valign="top">
-            <td><img src="{{ user.avatar(128) }}"></td>
-            <td>
-                <h1>User: {{ user.username }}</h1>
-                {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %} <!-- These two lines added in chapter 6 second half. -->
-                {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
-                <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p><!-- Line added in Ch8 -->
-                {% if user == current_user %}
-                <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-                <!-- elif and else blocks added in chapter 8 -->
-                {% elif not current_user.is_following(user) %}
-                <p><a href="{{ url_for('follow', username=user.username) }}">Follow</a></p>
-                {% else %}
-                <p><a href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a></p>
-                {% endif %}
-            </td>
-        </tr>
-    </table>
-    <hr />
-    {% for post in posts %}
--->
-<!-- Removed in second half of chapter 6. Replaced with Jinja2's 'include'.
-    <table>
-        <tr valign="top">
-            <td><img src="{{ post.author.avatar(36) }}"></td>
-            <td>{{ post.author.username }} says: <b>{{ post.body }}</b></td>
-        </tr>
-    </table>
--->
-        {% include '_post.html' %} <!-- Includes _post.html sub-template here -->
-    {% endfor %}
-{% endblock %}
+<!-- Code removed in Ch11 -->
