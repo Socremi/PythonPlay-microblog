@@ -30,3 +30,4 @@ class Config(object):
               'socremi@hotmail.com'
               ]
     POSTS_PER_PAGE = 5
+    LANGUAGES = ['en-US', 'en-GB', 'es']  # Config for flask-babel (language translation)
