@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-12-02 13:44+1100\n"
+"POT-Creation-Date: 2019-12-02 15:27+1100\n"
 "PO-Revision-Date: 2019-12-02 13:50+1100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -164,7 +164,7 @@ msgstr "El administrador ha sido notificado. ¡Lamentamos la inconveniencia!"
 #: app/templates/_post.html:16
 #, python-format
 msgid "%(username)s said %(when)s"
-msgstr ""
+msgstr "%(username)s dijo %(when)s"
 
 #: app/templates/base.html:8
 msgid "Microblog"

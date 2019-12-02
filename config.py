@@ -30,4 +30,10 @@ class Config(object):
               'socremi@hotmail.com'
               ]
     POSTS_PER_PAGE = 5
-    LANGUAGES = ['en-US', 'en-GB', 'es']  # Config for flask-babel (language translation)
+    LANGUAGES = ['en', 'es']  # Config for flask-babel (language translation)
+    # To update the Babel file containing text to translate run:
+    # (venv) $ pybabel extract -F babel.cfg -k _l -o messages.pot .
+    # (venv) $ pybabel update -i messages.pot -d app/translations
+    # Update the new additions to the various messages.po file with their
+    # translations then run:
+    # (venv) $ pybabel compile -d app/translations

@@ -26,7 +26,7 @@ def before_request():
     if current_user.is_authenticated:  # Checks is user is logged in
         current_user.last_seen = datetime.utcnow()  # Updates last seen time
         db.session.commit()  # Commits the last seen time to the database
-    g.locale = str(getlocale())  # This line added in Chapter 13
+    g.locale = str(get_locale())  # This line added in Chapter 13
 
 
 @app.route('/explore')
