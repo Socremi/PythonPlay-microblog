@@ -56,3 +56,9 @@
 <!-- End Chapter 11 code -->
 
 <!-- Old code removed in Chapter 11 -->
+
+<!-- Ch12 code -->
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}

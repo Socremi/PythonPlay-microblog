@@ -8,6 +8,7 @@ from logging.handlers import SMTPHandler, RotatingFileHandler  # Added in ch7
 import os  # Added in chapter 7
 from flask_mail import Mail  # This line was added in Chapter 10
 from flask_bootstrap import Bootstrap  # Added in Ch11
+from flask_moment import Moment  # Ch12
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -15,13 +16,10 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 mail = Mail(app)  # This line was added in chapter 10
-# The next line tells Flask-Login what view function handles logging in (the
-# name used in a url_for() call). Used when a user attempts to access a page
-# that requires the user to be logged in.
 login.login_view = 'login'
+bootstrap = Bootstrap(app)  # Ch11
+moment = Moment(app)  # Ch12
 
-# Bootstrap for dynamic styles and JS handling
-bootstrap = Bootstrap(app)
 
 # The code below this line was added in Chapter 7
 if not app.debug:
