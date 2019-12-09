@@ -5,14 +5,20 @@ from app import app
 
 
 def translate(text, source_language, dest_language):
-    if 'MS_TRANSLATOR_KEY' not in app.config or \
-            not app.config['MS_TRANSLATOR_KEY']:
-        return _('Error: the translation service is not configured.')
-    auth = {'Ocp-Asim-Subscription-Key': app.config['MS_TRANSLATOR_KEY']}
-    r = requests.get('https://api.microsofttranslator.com/v2/Ajax.svc'
-                     '/Translate?text={}&from={}&to={}'.format(
-                         text, source_language, dest_language),
-                     headers=auth)
-    if r.status_code != 200:
-        return _('Error: the translation service failed.')
-    return json.loads(r.content.decode('utf-8-sig'))
+    params = {'api-version':'3.0', 'from':source_language, 'to':dest_language}
+    headers = {'Ocp-Apim-Subscription-Key': app.config['MS_TRANSLATOR_KEY'], 'Content-Type': 'application/json; charset=UTF-8'}
+    body = [{'Text':text}]
+
+    response = requests.post('https://api.cognitive.microsofttranslator.com/translate', params=params, headers=headers, json=body)
+    return response
+    # if 'MS_TRANSLATOR_KEY' not in app.config or \
+    #     not app.config['MS_TRANSLATOR_KEY']:
+    #     return _('Error: the translation service is not configured.')
+    # auth = {'Ocp-Asim-Subscription-Key': app.config['MS_TRANSLATOR_KEY']}
+    # r = requests.get('https://api.microsofttranslator.com/v2/Ajax.svc'
+    #                  '/Translate?text={}&from={}&to={}'.format(
+    #                      text, source_language, dest_language),
+    #                 headers=auth)
+    # if r.status_code != 200:
+    #     return _('Error: the translation service failed.')
+    # return json.loads(r.content.decode('utf-8-sig'))
