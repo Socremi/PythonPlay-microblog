@@ -17,6 +17,7 @@ from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, \
     ResetPasswordRequestForm, ResetPasswordForm
 from app.email import send_password_reset_email
 from flask_babel import _, lazy_gettext as _l, get_locale  # Ch13 - function that marks text for translating
+from guess_language import guess_language  # Add in chapter 14 for discovering the language of a post.
 
 # The following method was added in the second half of chapter 6
 # The following function defines code to be executed right before any
@@ -84,7 +85,11 @@ def register():
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
+        language = guess_language(form.post.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        post = Post(body=form.post.data, author=current_user,
+                    language=language)
         db.session.add(post)
         db.session.commit()
         flash(_('Your post is now live!'))
