@@ -18,7 +18,7 @@ class Config(object):
 
     # The MS_TRANSLATOR_KEY is the key for using the Microsoft's Translator
     # service free edition
-    MS_TRANSLATOR_KEY = os.environ.get('MS)TRANSLATOR_KEY')
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
 
     # Defaults to port 25 if the environment variable is not set
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
