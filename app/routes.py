@@ -18,6 +18,8 @@ from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, \
 from app.email import send_password_reset_email
 from flask_babel import _, lazy_gettext as _l, get_locale  # Ch13 - function that marks text for translating
 from guess_language import guess_language  # Add in chapter 14 for discovering the language of a post.
+from flask import jsonify  # Ch14
+from app.translate import translate  # Ch14
 
 # The following method was added in the second half of chapter 6
 # The following function defines code to be executed right before any
@@ -217,3 +219,11 @@ def reset_password(token):
         flash(_('Your password has been reset.'))
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+
+@app.route('/translate', methods=['POST'])
+@login_required
+def translate_text():
+    return jsonify({'text': translate(request.form['text'],
+                                      request.form['source_language'],
+                                      request.form['dest_language'])})
